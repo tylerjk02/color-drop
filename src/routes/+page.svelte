@@ -1,6 +1,7 @@
 <script lang="ts">
   import { GetColorName } from "hex-color-to-color-name";
   import { wcagContrastChecker } from "@mdhnpm/wcag-contrast-checker";
+  import Clipboard from "../../node_modules/svelte-clipboard/src/Clipboard.svelte";
 
   let colorList: Array<string> = [];
   let hexStandard = [
@@ -46,12 +47,34 @@
     {#each colorList as item}
       {#if testColor(item) == true}
         <div class="item" style="background-color:{item}; color:#222222">
-          <h1>{item}</h1>
+          <div style="display:flex;">
+            <h1>{item}</h1>
+            <Clipboard
+            text={item}
+            let:copy
+            on:copy={() => {
+              console.log("Has Copied");
+            }}
+          >
+            <button class="copy-btn" on:click={copy}>Copy</button>
+          </Clipboard>
+          </div>
           <p>{GetColorName(item)}</p>
         </div>
       {:else}
         <div class="item" style="background-color:{item}; color:#FFFFFF">
-          <h1>{item}</h1>
+          <div style="display:flex;">
+            <h1>{item}</h1>
+            <Clipboard
+              text={item}
+              let:copy
+              on:copy={() => {
+                console.log("Has Copied");
+              }}
+            >
+              <button class="copy-btn" on:click={copy}>Copy</button>
+            </Clipboard>
+          </div>
           <p>{GetColorName(item)}</p>
         </div>
       {/if}
@@ -60,4 +83,14 @@
 </main>
 
 <style>
+  button {
+    /* background: none; */
+    /* border: none; */
+    padding: 10px;
+  }
+  .copy-btn {
+    padding: 0 2px;
+    margin: 5px;
+    
+  }
 </style>
