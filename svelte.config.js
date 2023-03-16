@@ -1,11 +1,9 @@
-import adapter from '@sveltejs/adapter-static';
-const dev = process.argv.includes('dev');
-
+import adapter from '@sveltejs/adapter-vercel';
+ 
 export default {
   kit: {
-    adapter: adapter(),
-    paths: {
-      base: dev ? '' : '/color-drop',
-    }
+    adapter: adapter({
+      // see the 'Deployment configuration' section below
+    })
   }
 };
