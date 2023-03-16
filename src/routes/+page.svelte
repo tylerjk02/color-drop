@@ -2,8 +2,11 @@
   import { GetColorName } from "hex-color-to-color-name";
   import { wcagContrastChecker } from "@mdhnpm/wcag-contrast-checker";
   import Clipboard from "../../node_modules/svelte-clipboard/src/Clipboard.svelte";
+  import { each } from "svelte/internal";
 
   let colorList: Array<string> = [];
+  let colorExampleHold: Array<string> = [];
+  let exampleOpenState = 0;
   let hexStandard = [
     "a",
     "b",
@@ -32,12 +35,29 @@
   };
 
   let generateNewColor = () => {
+    if (exampleOpenState == 1) {
+      exampleOpenState = 0;
+    }
     let newHexColor = "#";
     for (let i = 0; i < 6; i++) {
       newHexColor += randomHexStandard();
     }
     colorList.push(newHexColor);
     colorList = colorList;
+  };
+
+  let colorUseExample = (e: string) => {
+    colorExampleHold.push(e);
+    colorList = [e];
+    colorList = colorList;
+    exampleOpenState = 1;
+  };
+  let hideUseExample = (e: string) => {
+    exampleOpenState = 0;
+    colorList = [e];
+    colorExampleHold = [];
+    colorList = colorList;
+    colorExampleHold = colorExampleHold;
   };
 </script>
 
@@ -50,16 +70,54 @@
           <div style="display:flex;">
             <h1>{item}</h1>
             <Clipboard
-            text={item}
-            let:copy
-            on:copy={() => {
-              console.log("Has Copied");
-            }}
-          >
-            <button class="copy-btn" on:click={copy}>Copy</button>
-          </Clipboard>
+              text={item}
+              let:copy
+              on:copy={() => {
+                console.log("Has Copied");
+              }}
+            >
+              <button class="copy-btn" on:click={copy}>Copy</button>
+            </Clipboard>
+            {#if exampleOpenState == 0}
+              <button on:click={(e) => colorUseExample(item)} class="example">
+                Example Use
+              </button>
+            {:else}
+              <button on:click={(e) => hideUseExample(item)} class="example">
+                Hide Example
+              </button>
+            {/if}
           </div>
           <p>{GetColorName(item)}</p>
+
+          {#if exampleOpenState == 1}
+            <div class="hidden-preview">
+              <hr style="margin: 5px 0;" />
+              <h1>Hello World!</h1>
+              <p>This is my preview webpage!</p>
+              <br />
+              <div class="preview-content">
+                <section>
+                  Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                  Mollitia maxime, quas dolore itaque enim magni molestias illo
+                  in, temporibus, doloremque accusamus pariatur assumenda
+                  reprehenderit fugit! Quod non atque maxime! Voluptatem.
+                </section>
+                <section>
+                  Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                  Mollitia maxime, quas dolore itaque enim magni molestias illo
+                  in, temporibus, doloremque accusamus pariatur assumenda
+                  reprehenderit fugit! Quod non atque maxime! Voluptatem.
+                </section>
+                <section>
+                  Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                  Mollitia maxime, quas dolore itaque enim magni molestias illo
+                  in, temporibus, doloremque accusamus pariatur assumenda
+                  reprehenderit fugit! Quod non atque maxime! Voluptatem.
+                </section>
+              </div>
+            </div>
+          {/if}
         </div>
       {:else}
         <div class="item" style="background-color:{item}; color:#FFFFFF">
@@ -74,8 +132,46 @@
             >
               <button class="copy-btn" on:click={copy}>Copy</button>
             </Clipboard>
+            {#if exampleOpenState == 0}
+              <button on:click={(e) => colorUseExample(item)} class="example">
+                Example Use
+              </button>
+            {:else}
+              <button on:click={(e) => hideUseExample(item)} class="example">
+                Hide Example
+              </button>
+            {/if}
           </div>
           <p>{GetColorName(item)}</p>
+
+          {#if exampleOpenState == 1}
+            <div class="hidden-preview">
+              <hr style="margin: 5px 0;" />
+              <h1>Hello World!</h1>
+              <p>This is my preview webpage!</p>
+              <br />
+              <div class="preview-content">
+                <section>
+                  Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                  Mollitia maxime, quas dolore itaque enim magni molestias illo
+                  in, temporibus, doloremque accusamus pariatur assumenda
+                  reprehenderit fugit! Quod non atque maxime! Voluptatem.
+                </section>
+                <section>
+                  Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                  Mollitia maxime, quas dolore itaque enim magni molestias illo
+                  in, temporibus, doloremque accusamus pariatur assumenda
+                  reprehenderit fugit! Quod non atque maxime! Voluptatem.
+                </section>
+                <section>
+                  Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                  Mollitia maxime, quas dolore itaque enim magni molestias illo
+                  in, temporibus, doloremque accusamus pariatur assumenda
+                  reprehenderit fugit! Quod non atque maxime! Voluptatem.
+                </section>
+              </div>
+            </div>
+          {/if}
         </div>
       {/if}
     {/each}
@@ -83,14 +179,21 @@
 </main>
 
 <style>
+  .item {
+    padding: 5px;
+  }
   button {
     /* background: none; */
     /* border: none; */
     padding: 10px;
   }
-  .copy-btn {
+  button {
     padding: 0 2px;
     margin: 5px;
-    
+  }
+
+  .preview-content {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
   }
 </style>
