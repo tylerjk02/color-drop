@@ -1,11 +1,11 @@
-<script lang="ts">
+<script>
   import { GetColorName } from "hex-color-to-color-name";
   import { wcagContrastChecker } from "@mdhnpm/wcag-contrast-checker";
   import Clipboard from "../../node_modules/svelte-clipboard/src/Clipboard.svelte";
   import { each } from "svelte/internal";
 
-  let colorList: Array<string> = [];
-  let colorExampleHold: Array<string> = [];
+  let colorList = [];
+  let colorExampleHold = [];
   let exampleOpenState = 0;
   let hexStandard = [
     "a",
@@ -28,12 +28,10 @@
   let randomHexStandard = () => {
     return hexStandard[Math.floor(Math.random() * hexStandard.length)];
   };
-
-  let testColor = (e: string) => {
+  let testColor = (e) => {
     let blackTextCheck = wcagContrastChecker("#000000", e);
     return blackTextCheck.regularText.aa;
   };
-
   let generateNewColor = () => {
     if (exampleOpenState == 1) {
       exampleOpenState = 0;
@@ -45,14 +43,13 @@
     colorList.push(newHexColor);
     colorList = colorList;
   };
-
-  let colorUseExample = (e: string) => {
+  let colorUseExample = (e) => {
     colorExampleHold.push(e);
     colorList = [e];
     colorList = colorList;
     exampleOpenState = 1;
   };
-  let hideUseExample = (e: string) => {
+  let hideUseExample = (e) => {
     exampleOpenState = 0;
     colorList = [e];
     colorExampleHold = [];
