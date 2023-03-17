@@ -1,14 +1,4 @@
-import { c as create_ssr_component, b as add_attribute, v as validate_component } from "../../chunks/index.js";
-/* empty css                                                    */const css$1 = {
-  code: "svg.svelte-90db47{width:65px}",
-  map: null
-};
-const WaterDrop = create_ssr_component(($$result, $$props, $$bindings, slots) => {
-  let { fill } = $$props;
-  if ($$props.fill === void 0 && $$bindings.fill && fill !== void 0)
-    $$bindings.fill(fill);
-  $$result.css.add(css$1);
-  return `<svg version="1.0" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500.000000 500.000000" preserveAspectRatio="xMidYMid meet" class="svelte-90db47"><g transform="translate(0.000000,500.000000) scale(0.100000,-0.100000)"${add_attribute("fill", fill, 0)} stroke="none"><path d="M2411 4793 c-17 -21 -20 -35 -15 -73 19 -147 -140 -439 -531 -970
+import{S as d,i as m,s as _,N as c,O as h,m as f,h as i,n,b as g,C as v,D as u}from"./index.b050e071.js";function x(o){let e,t,s,r;return{c(){e=c("svg"),t=c("g"),s=c("path"),r=c("path"),this.h()},l(a){e=h(a,"svg",{version:!0,xmlns:!0,viewBox:!0,preserveAspectRatio:!0,class:!0});var l=f(e);t=h(l,"g",{transform:!0,fill:!0,stroke:!0});var p=f(t);s=h(p,"path",{d:!0}),f(s).forEach(i),r=h(p,"path",{d:!0}),f(r).forEach(i),p.forEach(i),l.forEach(i),this.h()},h(){n(s,"d",`M2411 4793 c-17 -21 -20 -35 -15 -73 19 -147 -140 -439 -531 -970
 -378 -513 -560 -803 -655 -1044 -19 -46 -29 -60 -53 -69 -54 -18 -249 -117
 -335 -169 -124 -75 -233 -159 -326 -251 -138 -138 -224 -272 -279 -432 -27
 -79 -31 -107 -35 -225 -3 -113 -1 -150 17 -223 79 -331 356 -624 796 -843 220
@@ -32,28 +22,7 @@ l-39 29 1 168 c1 195 -15 183 141 106 185 -92 301 -171 434 -294 124 -115 214
 -349 197 -599 161 -841 -49 -331 -236 -625 -514 -807 -227 -149 -434 -205
 -711 -194 -225 9 -404 67 -593 193 -331 220 -521 571 -521 964 0 157 24 245
 122 445 109 222 216 385 571 870 331 452 471 677 525 843 10 29 21 52 26 52 4
-0 56 -63 113 -141z"></path><path d="M3255 2878 l-28 -25 13 -157 c48 -576 -132 -949 -510 -1062 -47 -14
+0 56 -63 113 -141z`),n(r,"d",`M3255 2878 l-28 -25 13 -157 c48 -576 -132 -949 -510 -1062 -47 -14
 -93 -28 -103 -30 -9 -3 -24 -19 -33 -36 -13 -25 -13 -35 -3 -59 24 -58 81 -64
 206 -20 286 99 471 309 557 631 39 143 49 258 43 478 -7 252 -16 284 -84 298
--23 4 -36 0 -58 -18z"></path></g></svg>`;
-});
-const Header_svelte_svelte_type_style_lang = "";
-const css = {
-  code: ".brand.svelte-50wdej{padding:5px;display:flex;align-items:center;gap:5px}h1.svelte-50wdej{font-size:32px}",
-  map: null
-};
-const Header = create_ssr_component(($$result, $$props, $$bindings, slots) => {
-  $$result.css.add(css);
-  return `<header class="header"><div class="brand svelte-50wdej"><div class="brand-top">${validate_component(WaterDrop, "WaterDrop").$$render($$result, { fill: "#222222" }, {}, {})}</div>
-    <div class="brand-btm"><h1 class="svelte-50wdej">ColorDrop</h1>
-      <p>Color Palettes Made Easy</p></div></div>
-</header>`;
-});
-const app = "";
-const Layout = create_ssr_component(($$result, $$props, $$bindings, slots) => {
-  return `${validate_component(Header, "Header").$$render($$result, {}, {}, {})}
-${slots.default ? slots.default({}) : ``}`;
-});
-export {
-  Layout as default
-};
+-23 4 -36 0 -58 -18z`),n(t,"transform","translate(0.000000,500.000000) scale(0.100000,-0.100000)"),n(t,"fill",o[0]),n(t,"stroke","none"),n(e,"version","1.0"),n(e,"xmlns","http://www.w3.org/2000/svg"),n(e,"viewBox","0 0 500.000000 500.000000"),n(e,"preserveAspectRatio","xMidYMid meet"),n(e,"class","svelte-90db47")},m(a,l){g(a,e,l),v(e,t),v(t,s),v(t,r)},p(a,[l]){l&1&&n(t,"fill",a[0])},i:u,o:u,d(a){a&&i(e)}}}function w(o,e,t){let{fill:s}=e;return o.$$set=r=>{"fill"in r&&t(0,s=r.fill)},[s]}class E extends d{constructor(e){super(),m(this,e,w,x,_,{fill:0})}}export{E as W};
