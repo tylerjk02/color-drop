@@ -1,11 +1,12 @@
-<script>
+<script lang="ts">
   import { GetColorName } from "hex-color-to-color-name";
   import { wcagContrastChecker } from "@mdhnpm/wcag-contrast-checker";
   import Clipboard from "../../node_modules/svelte-clipboard/src/Clipboard.svelte";
   import { each } from "svelte/internal";
+  import WaterDrop from "$lib/WaterDrop.svelte";
 
-  let colorList = [];
-  let colorExampleHold = [];
+  let colorList: string[] = [];
+  let colorExampleHold: string[] = [];
   let exampleOpenState = 0;
   let hexStandard = [
     "a",
@@ -28,7 +29,7 @@
   let randomHexStandard = () => {
     return hexStandard[Math.floor(Math.random() * hexStandard.length)];
   };
-  let testColor = (e) => {
+  let testColor = (e: string) => {
     let blackTextCheck = wcagContrastChecker("#000000", e);
     return blackTextCheck.regularText.aa;
   };
@@ -43,13 +44,13 @@
     colorList.push(newHexColor);
     colorList = colorList;
   };
-  let colorUseExample = (e) => {
+  let colorUseExample = (e: string) => {
     colorExampleHold.push(e);
     colorList = [e];
     colorList = colorList;
     exampleOpenState = 1;
   };
-  let hideUseExample = (e) => {
+  let hideUseExample = (e: string) => {
     exampleOpenState = 0;
     colorList = [e];
     colorExampleHold = [];
@@ -60,7 +61,7 @@
 
 <main>
   <div class="generator">
-    <button on:click={generateNewColor}>Generate</button>
+    <button class="generate-btn" on:click={generateNewColor}>Generate</button>
     {#each colorList as item}
       {#if testColor(item) == true}
         <div class="item" style="background-color:{item}; color:#222222">
@@ -90,8 +91,15 @@
           {#if exampleOpenState == 1}
             <div class="hidden-preview">
               <hr style="margin: 5px 0;" />
-              <h1>Hello World!</h1>
-              <p>This is my preview webpage!</p>
+              <div class="preview-brand">
+                <div class="preview-top">
+                  <WaterDrop fill={"#222222"} />
+                </div>
+                <div class="preview-btm">
+                  <h1>Hello World!</h1>
+                  <p>This is my preview webpage!</p>
+                </div>
+              </div>
               <br />
               <div class="preview-content">
                 <section>
@@ -144,9 +152,17 @@
           {#if exampleOpenState == 1}
             <div class="hidden-preview">
               <hr style="margin: 5px 0;" />
-              <h1>Hello World!</h1>
-              <p>This is my preview webpage!</p>
+              <div class="preview-brand">
+                <div class="preview-top">
+                  <WaterDrop fill={"#FFFFFF"} />
+                </div>
+                <div class="preview-btm">
+                  <h1>Hello World!</h1>
+                  <p>This is my preview webpage!</p>
+                </div>
+              </div>
               <br />
+
               <div class="preview-content">
                 <section>
                   Lorem ipsum dolor sit amet consectetur adipisicing elit.
@@ -176,21 +192,44 @@
 </main>
 
 <style>
+  .generator  {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
   .item {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 85%;
     padding: 5px;
   }
+  
   button {
-    /* background: none; */
-    /* border: none; */
-    padding: 10px;
+    padding: 5px;
+    margin: 0 3px;
   }
-  button {
-    padding: 0 2px;
-    margin: 5px;
+  .generate-btn {
+    width: 50%;
+    margin: 0 auto;
   }
 
   .preview-content {
+    width: 85%;
+    margin: 0 auto;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
+  }
+  .preview-content section {
+    margin: 0 10px;
+    padding: 0 0 10px 0;
+  }
+
+  .preview-brand {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
   }
 </style>
