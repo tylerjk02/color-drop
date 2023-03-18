@@ -4,6 +4,7 @@
   import Clipboard from "../../node_modules/svelte-clipboard/src/Clipboard.svelte";
   import { each } from "svelte/internal";
   import WaterDrop from "$lib/WaterDrop.svelte";
+  import hexRgb from 'hex-rgb'
 
   let colorList: string[] = [];
   let colorExampleHold: string[] = [];
@@ -65,8 +66,10 @@
     {#each colorList as item}
       {#if testColor(item) == true}
         <div class="item" style="background-color:{item}; color:#222222">
-          <div style="display:flex;">
+          <div style="">
             <h1>{item}</h1>
+            <p>{GetColorName(item)}</p>
+            <p>{hexRgb(item, {format: 'css'})}</p>
             <Clipboard
               text={item}
               let:copy
@@ -78,7 +81,7 @@
             </Clipboard>
             {#if exampleOpenState == 0}
               <button on:click={(e) => colorUseExample(item)} class="example">
-                Example Use
+                Example
               </button>
             {:else}
               <button on:click={(e) => hideUseExample(item)} class="example">
@@ -86,7 +89,6 @@
               </button>
             {/if}
           </div>
-          <p>{GetColorName(item)}</p>
 
           {#if exampleOpenState == 1}
             <div class="hidden-preview">
@@ -126,8 +128,10 @@
         </div>
       {:else}
         <div class="item" style="background-color:{item}; color:#FFFFFF">
-          <div style="display:flex;">
+          <div style="">
             <h1>{item}</h1>
+            <p>{GetColorName(item)}</p>
+            <p>{hexRgb(item, {format: 'css'})}</p>
             <Clipboard
               text={item}
               let:copy
@@ -139,7 +143,7 @@
             </Clipboard>
             {#if exampleOpenState == 0}
               <button on:click={(e) => colorUseExample(item)} class="example">
-                Example Use
+                Example
               </button>
             {:else}
               <button on:click={(e) => hideUseExample(item)} class="example">
@@ -147,7 +151,6 @@
               </button>
             {/if}
           </div>
-          <p>{GetColorName(item)}</p>
 
           {#if exampleOpenState == 1}
             <div class="hidden-preview">
@@ -204,15 +207,23 @@
     align-items: center;
     width: 85%;
     padding: 5px;
+    text-align: center;
   }
   
   button {
+    background: #f0f0f090;
     padding: 5px;
-    margin: 0 3px;
+    margin: 4px auto;
+    font-size: 16px;
+    border: 1px solid black;
   }
   .generate-btn {
+    background: #22222295;
+    color: #ffffff;
+    font-weight: bold;
     width: 50%;
-    margin: 0 auto;
+    margin: 5px auto;
+    font-size: 20px;
   }
 
   .preview-content {
